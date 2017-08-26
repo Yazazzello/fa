@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "nl.funda.yazazzello.fa"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    final RETROFIT_VERSION = '2.1.0'
+    final DAGGER_VERSION = '2.9'
+    final RX_ANDROID_VERSION = '1.2.1'
+    final RX_JAVA = '1.2.4'
+    final LEAKCANARY_VERSION = '1.5'
+    final PICASSO_VERSION = '2.5.2'
+    final OK_HTTP_VERSION = '3.6.0'
+    final TIMBER_VERSION = '4.5.1'
+
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
+    //Required by Dagger2
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$LEAKCANARY_VERSION"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
+
+    compile "com.squareup.okhttp3:logging-interceptor:$OK_HTTP_VERSION"
+
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+    compile "io.reactivex:rxandroid:$RX_ANDROID_VERSION"
+    compile "io.reactivex:rxjava:$RX_JAVA"
+    compile "com.squareup.picasso:picasso:$PICASSO_VERSION"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "com.squareup.okhttp3:okhttp:$OK_HTTP_VERSION"
+    compile "com.jakewharton.timber:timber:$TIMBER_VERSION"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
+    testCompile 'junit:junit:4.12'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+}
+repositories {
+    mavenCentral()
+}
+
+kapt {
+    generateStubs = true
+}

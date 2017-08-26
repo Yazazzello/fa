@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FA</string>
+    <string name="title_activity_main">Funda</string>
+    <string name="estates">Apartments</string>
+    <string name="estates_garden">Apartments With Garden</string>
+</resources>
